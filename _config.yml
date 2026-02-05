@@ -1,0 +1,12 @@
+title: vm.fail
+description: low-level systems research
+url: https://vm.fail
+baseurl: ""
+
+sass:
+  style: compressed
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
