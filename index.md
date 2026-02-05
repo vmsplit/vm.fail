@@ -31,10 +31,4 @@ ARM64 and x86_64. Occasionally firmware.
 
 # Contact
 
-pgp preferred
-
-```
-[fingerprint goes here]
-```
-
 <vmsplit@pm.me>
