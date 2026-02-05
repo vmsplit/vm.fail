@@ -1,0 +1,21 @@
+<footer>
+  <span><a href="/">vm.fail</a></span>
+  <span>{{ site.time | date: "%Y" }}</span>
+  <span><button id="theme-toggle" aria-label="toggle theme"></button></span>
+</footer>
+
+<script>
+(function() {
+  var root = document.documentElement;
+  var toggle = document.getElementById('theme-toggle');
+  var stored = localStorage.getItem('theme');
+
+  if (stored) root.dataset.theme = stored;
+
+  toggle.addEventListener('click', function() {
+    var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+    root.dataset.theme = next;
+    localStorage.setItem('theme', next);
+  });
+})();
+</script>

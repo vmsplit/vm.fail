@@ -1,0 +1,46 @@
+self:
+  - name: nebula
+    url: https://github.com/vmsplit/nebula
+    desc: arm64 linux position-independent shellcode framework
+
+  - name: kvmrsk
+    url: https://github.com/vmsplit/kvmrsk
+    desc: kvm rootkit for aarch64
+
+  - name: icekit
+    url: https://github.com/vmsplit/icekit
+    desc: cache-as-ram + amd x86_64 cache line locking
+
+  - name: checkm8
+    url: https://github.com/vmsplit/checkm8
+    desc: bypassing intel txt tboot integrity checks
+    archived: true
+
+  - name: linebacker
+    url: https://github.com/vmsplit/linebacker
+    desc: preventing abuse of hardware cache lockdown on armv7a
+
+  - name: silkhook
+    url: https://github.com/vmsplit/silkhook
+    desc: arm64 hooking library
+    wip: true
+
+  - name: IceVMM
+    url: https://github.com/vmsplit/IceVMM
+    desc: minimal hypervisor for aarch64
+    wip: true
+
+
+wintermute:
+  - name: arm64_silent_syscall_hook
+    url: https://github.com/3intermute/arm64_silent_syscall_hook
+    desc: silent syscall hooking via exception handler patching
+
+  - name: linux_syscall_hook
+    url: https://github.com/3intermute/linux_syscall_hook
+    desc: arm64 linux syscall hooking methods
+    archived: true
+
+  - name: tlbkit
+    url: https://github.com/3intermute/tlbkit
+    desc: tlb manipulation toolkit
