@@ -16,19 +16,39 @@ layout: default
 systems security research. hypervisors, rootkits, cache manipulation, shellcode.
 arm64 and x86_64. occasionally firmware.
 
+contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tutanota.de)
+
+# code search
+
+<div class="code-search">
+<input type="text" id="search-input" placeholder="search repositories..." />
+<select id="repo-select">
+<option value="">select repository</option>
+{% for p in site.data.projects.self %}
+<option value="{{ p.repo }}">{{ p.name }}</option>
+{% endfor %}
+{% for p in site.data.projects.wintermute %}
+<option value="{{ p.repo }}">{{ p.name }}</option>
+{% endfor %}
+</select>
+<button id="search-btn">search</button>
+</div>
+
+<div id="search-results"></div>
+
 # projects
 
-{% for project in site.data.projects.self %}
+{% for p in site.data.projects.self %}
 <details class="project">
 <summary>
-<span class="project-name">~ {{ project.name }}</span>{% if project.wip %}<span class="tag tag--wip">[wip]</span>{% endif %}{% if project.archived %}<span class="tag tag--archived">[archived]</span>{% endif %}
-<span class="project-desc dim">{{ project.desc }}</span>
+<span class="project-name">~ {{ p.name }}</span>{% if p.wip %}<span class="tag tag--wip">[wip]</span>{% endif %}{% if p.archived %}<span class="tag tag--archived">[archived]</span>{% endif %}
+<span class="project-desc dim">{{ p.desc }}</span>
 </summary>
 <div class="project-content">
-{% if project.details %}
-<p class="project-details">{{ project.details }}</p>
-{% endif %}
-<p class="project-link"><a href="{{ project.url }}">view source →</a></p>
+
+<p class="project-details">{{ p.details }}</p>
+
+<p class="project-link"><a href="{{ p.url }}">view source &rarr;</a></p>
 </div>
 </details>
 {% endfor %}
@@ -37,39 +57,76 @@ arm64 and x86_64. occasionally firmware.
 
 ## ~ wintermute
 
-{% for project in site.data.projects.wintermute %}
+{% for p in site.data.projects.wintermute %}
 <details class="project">
 <summary>
-<span class="project-name">{{ project.name }}</span>{% if project.wip %}<span class="tag tag--wip">[wip]</span>{% endif %}{% if project.archived %}<span class="tag tag--archived">[archived]</span>{% endif %}
-<span class="project-desc dim">{{ project.desc }}</span>
+<span class="project-name">{{ p.name }}</span>{% if p.wip %}<span class="tag tag--wip">[wip]</span>{% endif %}{% if p.archived %}<span class="tag tag--archived">[archived]</span>{% endif %}
+<span class="project-desc dim">{{ p.desc }}</span>
 </summary>
 <div class="project-content">
-{% if project.details %}
-<p class="project-details">{{ project.details }}</p>
-{% endif %}
-<p class="project-link"><a href="{{ project.url }}">view source →</a></p>
+
+<p class="project-details">{{ p.details }}</p>
+
+<p class="project-link"><a href="{{ p.url }}">view source &rarr;</a></p>
 </div>
 </details>
 {% endfor %}
 
 # icekit
 
-<pre class="ascii-art">
-                       ___           ___           ___
+<pre class="ascii-art">                       ___           ___           ___
                        /\__\         /\__\         /|  |
           ___         /:/  /        /:/ _/_       |:|  |        ___           ___
          /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\
         /:/__/      /:/  /  ___   /:/ /:/ _/_   __|:|  |      /:/__/        /:/  /
-       /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/
-       \/\:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/\:\  \__   /::\  \
-          ":\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        ":\/\__\ /:/\:\  \
-           \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \
+       /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/ 
+       \/:/  /     \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/\:\  \__   /::\  \ 
+          ":/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        ":/\__\ /:/\:\  \ 
+           \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \ 
            /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\
-           \/__/       \/__/         \/__/         \/__/         \/__/         \/__/
+           \/__/       \/__/         \/__/         \/__/         \/__/         \/__/ 
 </pre>
 
 <p class="dim">cache-as-ram + cat l3 cache line locking on x86_64. evades memory introspection via cache incoherence.</p>
 
-# contact
+<script>
+(function() {
+  var searchBtn = document.getElementById('search-btn');
+  var searchInput = document.getElementById('search-input');
+  var repoSelect = document.getElementById('repo-select');
+  var resultsDiv = document.getElementById('search-results');
 
-[vmsplit@pm.me](mailto:vmsplit@pm.me)
+  function searchCode() {
+    var query = searchInput.value.trim();
+    var repo = repoSelect.value;
+    if (!query || !repo) {
+      resultsDiv.innerHTML = '<p class="dim">select a repository and enter a search term</p>';
+      return;
+    }
+    var url = 'https://api.github.com/search/code?q=' + encodeURIComponent(query + ' repo:' + repo);
+    resultsDiv.innerHTML = '<p class="dim">searching...</p>';
+    fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.items || data.items.length === 0) {
+          resultsDiv.innerHTML = '<p class="dim">no results</p>';
+          return;
+        }
+        var html = '<ul class="search-results-list">';
+        data.items.slice(0, 10).forEach(function(item) {
+          html += '<li><a href="' + item.html_url + '">' + item.path + '</a></li>';
+        });
+        html += '</ul>';
+        resultsDiv.innerHTML = html;
+      })
+      .catch(function(e) {
+        resultsDiv.innerHTML = '<p class="dim">error: ' + e.message + '</p>';
+      });
+  }
+
+  searchBtn.addEventListener('click', searchCode);
+  searchInput.addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') searchCode();
+  });
+})();
+</script>
