@@ -9,33 +9,14 @@ self:
     url: https://github.com/vmsplit/icekit
     repo: vmsplit/icekit
     desc: cache-as-ram + amd x86_64 cache line locking
-    details: "x86_64 port of CacheKit. evades memory introspection via cache incoherence. locks data in L1/L2, prevents eviction by replacement policy."
-    ascii: |
-                                         ___           ___           ___                               
-                                         /\__\         /\__\         /|  |                          IceKit
-                            ___         /:/  /        /:/ _/_       |:|  |        ___           ___     
-                           /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\    
-                          /:/__/      /:/  /  ___   /:/ /:/ _/_   __|:|  |      /:/__/        /:/  /    
-                         /::\  \     /:/__/  /\__\ /:_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/     
-                         \/\:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/:::::/__/ \/\:\  \__   /::\  \     
-                            \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \    
-                             \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \   
-                             /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\  
-                             \/__/       \/__/         \/__/         \/__/         \/__/         \/__/ 
-      
+    details: "x86_64 port of CacheKit. evades memory introspection via cache incoherence. locks data in L3 via CAT, prevents eviction by replacement policy."
+
   - name: IceVMM
     url: https://github.com/vmsplit/IceVMM
     repo: vmsplit/IceVMM
     desc: minimal hypervisor for aarch64
     wip: true
-    details: "toy hypervisor demonstrating kernel security features (LKRG, CFI, PaX) at hypervisor level. moving security from kernel to hypervisor for better isolation."
-    ascii: |
-      #################################
-       ___ ___ _____   ____  __ __  __ 
-      |_ _/ __| __\ \ / /  \/  |  \/  |
-       | | (__| _| \ V /| |\/| | |\/| |
-      |___\___|___| \_/ |_|  |_|_|  |_|   
-      #################################
+    details: "toy hypervisor demonstrating kernel security features (LKRG, CFI, PaX) at hypervisor level."
 
   - name: linebacker
     url: https://github.com/vmsplit/linebacker
@@ -43,17 +24,12 @@ self:
     desc: preventing abuse of hardware cache lockdown on armv8a
     wip: true
     details: "implements CacheLight paper technique to prevent malicious cache line locking on ARMv8A devices."
-    ascii: |
-       ____   ___  _____  _____  _____  _____  _____  __ ___ _____  _____ 
-      /  _/  /___\/  _  \/   __\/  _  \/  _  \/     \|  |  //   __\/  _  \
-      |  |---|   ||  |  ||   __||  _  <|  _  ||  |--||  _ < |   __||  _  <
-      \_____/\___/\__|__/\_____\/_____/\__|__/\_____/|__|__\\_____\/__|__/
 
   - name: kvmrsk
     url: https://github.com/vmsplit/kvmrsk
     repo: vmsplit/kvmrsk
     desc: kvm rootkit for aarch64
-    details: "rust rewrite of 3intermute's PoC for Singh's paper on KVM's insecure design on ARM. stub EVT manipulation."
+    details: "rust rewrite of 3intermute's PoC for Singh's paper on KVM's insecure design on ARM."
 
   - name: checkm8
     url: https://github.com/vmsplit/checkm8
