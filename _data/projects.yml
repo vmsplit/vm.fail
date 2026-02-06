@@ -2,45 +2,23 @@ self:
   - name: nebula
     url: https://github.com/vmsplit/nebula
     desc: arm64 linux position-independent shellcode framework
-    details: |
-      resolves symbols at runtime via /proc/self/maps parsing.
-      djb2 hash for module lookup, DT_SYMTAB walking for symbols.
-      inline asm syscalls. fully pic with -fPIE -mcmodel=tiny.
+    details: "resolves symbols at runtime via /proc/self/maps parsing. djb2 hash for module lookup, DT_SYMTAB walking for symbols. inline asm syscalls. fully pic with -fPIE -mcmodel=tiny."
 
   - name: kvmrsk
     url: https://github.com/vmsplit/kvmrsk
     desc: kvm rootkit for aarch64
-    details: |
-      rust rewrite of 3intermute's PoC for Singh's paper on
-      KVM's insecure design on ARM. stub EVT manipulation.
+    details: "rust rewrite of 3intermute's PoC for Singh's paper on KVM's insecure design on ARM. stub EVT manipulation."
 
   - name: icekit
     url: https://github.com/vmsplit/icekit
     desc: cache-as-ram + amd x86_64 cache line locking
-    details: |
-      x86_64 port of CacheKit. evades memory introspection
-      via cache incoherence. locks data in L1/L2, prevents
-      eviction by replacement policy.
-    ascii: |
-                         ___           ___           ___
-                         /\__\         /\__\         /|  |
-            ___         /:/  /        /:/ _/_       |:|  |        ___           ___
-           /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\
-          /:/__/      /:/  /  ___   /:/ /:/ _/_   __|:|  |      /:/__/        /:/  /
-         /::\  \     /:/__/  /\__/ /:/_/:/ /\__/ /\ |:|__|____ /::\  \       /:/__/
-         \/\:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/\:\  \__   /::\  \
-            ":\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \
-             \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \
-             /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\
-             \/__/       \/__/         \/__/         \/__/         \/__/         \/__/
+    details: "x86_64 port of CacheKit. evades memory introspection via cache incoherence. locks data in L1/L2, prevents eviction by replacement policy."
 
   - name: checkm8
     url: https://github.com/vmsplit/checkm8
     desc: bypassing intel txt tboot integrity checks
     archived: true
-    details: |
-      coreboot shim for Intel TXT bypass.
-      modifies tboot integrity verification flow.
+    details: "coreboot shim for Intel TXT bypass. modifies tboot integrity verification flow."
 
   - name: linebacker
     url: https://github.com/vmsplit/linebacker
@@ -56,14 +34,11 @@ self:
     desc: minimal hypervisor for aarch64
     wip: true
 
-
 wintermute:
   - name: arm64_silent_syscall_hook
     url: https://github.com/3intermute/arm64_silent_syscall_hook
     desc: silent syscall hooking via exception handler patching
-    details: |
-      hooks without modifying sys_call_table or handlers.
-      patches exception vectors directly. featured in tmp.0ut vol3.
+    details: "hooks without modifying sys_call_table or handlers. patches exception vectors directly. featured in tmp.0ut vol3."
 
   - name: linux_syscall_hook
     url: https://github.com/3intermute/linux_syscall_hook
