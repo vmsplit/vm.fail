@@ -3,62 +3,60 @@ self:
     url: https://github.com/vmsplit/nebula
     repo: vmsplit/nebula
     desc: arm64 linux position-independent shellcode framework
-    details: "resolves symbols at runtime via /proc/self/maps parsing. djb2 hash for module lookup, DT_SYMTAB walking for symbols. inline asm syscalls. fully pic with -fPIE -mcmodel=tiny."
+    details: "resolves symbols at runtime via /proc/self/maps parsing. djb2 hash for module/symbol lookup. inline syscalls."
 
   - name: icekit
     url: https://github.com/vmsplit/icekit
     repo: vmsplit/icekit
-    desc: cache-as-ram + amd x86_64 cache line locking
-    details: "x86_64 port of CacheKit. evades memory introspection via cache incoherence. locks data in L3 via CAT, prevents eviction by replacement policy."
-
-  - name: IceVMM
-    url: https://github.com/vmsplit/IceVMM
-    repo: vmsplit/IceVMM
-    desc: minimal hypervisor for aarch64
-    wip: true
-    details: "toy hypervisor demonstrating kernel security features (LKRG, CFI, PaX) at hypervisor level."
-
-  - name: linebacker
-    url: https://github.com/vmsplit/linebacker
-    repo: vmsplit/linebacker
-    desc: preventing abuse of hardware cache lockdown on armv8a
-    wip: true
-    details: "implements CacheLight paper technique to prevent malicious cache line locking on ARMv8A devices."
-
-  - name: kvmrsk
-    url: https://github.com/vmsplit/kvmrsk
-    repo: vmsplit/kvmrsk
-    desc: kvm rootkit for aarch64
-    details: "rust rewrite of 3intermute's PoC for Singh's paper on KVM's insecure design on ARM."
+    desc: cache-as-ram + CAT L3 cache line locking on x86_64
+    details: "port of CacheKit to x86_64. evades memory introspection via cache incoherence using AMD l3_cat."
 
   - name: checkm8
     url: https://github.com/vmsplit/checkm8
     repo: vmsplit/checkm8
-    desc: bypassing intel txt tboot integrity checks
-    archived: true
-    details: "coreboot shim for Intel TXT bypass. modifies tboot integrity verification flow."
+    desc: coreboot + tboot measured launch research
+    details: "intel TXT measured launch with coreboot firmware. trusted boot chain experiments."
+
+  - name: icevmm
+    url: https://github.com/vmsplit/IceVMM
+    repo: vmsplit/IceVMM
+    desc: minimal arm64 hypervisor
+    details: "baremetal type-1 hypervisor for arm64. EL2 virtualization experiments."
+    wip: true
+
+  - name: linebacker
+    url: https://github.com/vmsplit/linebacker
+    repo: vmsplit/linebacker
+    desc: kernel-level defense research
+    wip: true
+
+  - name: kvmrsk
+    url: https://github.com/vmsplit/kvmrsk
+    repo: vmsplit/kvmrsk
+    desc: rust rewrite of kvmrk KVM exploitation PoC
+    details: "based on Singh's paper on KVM's insecure design on ARM."
 
 wintermute:
   - name: kvmrk
     url: https://github.com/3intermute/kvmrk
     repo: 3intermute/kvmrk
-    desc: kvm rootkit proof of concept
-    details: "original PoC implementation for Singh's paper on KVM's insecure design on ARM."
+    desc: KVM exploitation PoC for ARM
+    details: "original implementation of Singh's KVM ARM security research."
 
   - name: hvICE
     url: https://github.com/3intermute/hvICE
     repo: 3intermute/hvICE
-    desc: hypervisor-based introspection countermeasures evasion
+    desc: hypervisor-based introspection evasion
     details: "hypervisor techniques for evading memory introspection."
 
   - name: arm64_silent_syscall_hook
     url: https://github.com/3intermute/arm64_silent_syscall_hook
     repo: 3intermute/arm64_silent_syscall_hook
-    desc: silent syscall hooking via exception handler patching
-    details: "arm64 syscall hooking without modifying syscall table. patches exception handlers directly."
+    desc: silent syscall hooking on arm64
+    details: "stealthy syscall interception without modifying syscall table."
 
   - name: ramiel
     url: https://github.com/3intermute/ramiel
     repo: 3intermute/ramiel
-    desc: arm64 runtime analysis and manipulation framework
-    details: "framework for runtime analysis and manipulation on arm64 linux."
+    desc: arm64 rootkit research
+    details: "kernel-level persistence and evasion techniques for arm64 linux."
