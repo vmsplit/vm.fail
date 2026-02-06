@@ -3,12 +3,10 @@ layout: default
 ---
 
 <pre class="ascii-banner">
-            __   __   __         _  _ 
- __   __ _ |  \_|  | / _|  __ _ (_)| |
- \ \ / /| '_ ` _ \ | |   | || |_  / _` || || |
-  \ V / | | | | | || | _ | ||  _|| (_| || || |
-   \_/  |_| |_| |_||_|(_)|_||_|   \__,_||_||_|
-                   |__| |__|                  
+         _  _  __      _ _
+__ _____| || |/ _|__ _(_) |
+\ V / _ ` '.| |  _/ _` | | |
+ \_/|_|_|_|_|_| \__,_|_|_|
 </pre>
 
 <p><span class="hi">vm.fail</span> <span class="dim">{low-level systems research}</span></p>
@@ -23,9 +21,11 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 # code search
 
 <div class="code-search">
-<input type="text" id="search-input" placeholder="search repositories..." />
+<div class="search-header"><span class="search-icon">&#x2315;</span> search</div>
+<div class="search-controls">
+<input type="text" id="search-input" placeholder="query..." />
 <select id="repo-select">
-<option value="">select repository</option>
+<option value="">repo</option>
 {% for p in site.data.projects.self %}
 <option value="{{ p.repo }}">{{ p.name }}</option>
 {% endfor %}
@@ -33,7 +33,8 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <option value="{{ p.repo }}">{{ p.name }}</option>
 {% endfor %}
 </select>
-<button id="search-btn">search</button>
+<button id="search-btn">&rarr;</button>
+</div>
 </div>
 
 <div id="search-results"></div>
@@ -57,17 +58,17 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">cache-as-ram + CAT L3 cache line locking on x86_64</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">                       ___           ___           ___
-                       /\__\         /\__\         /|  |
-          ___         /:/  /        /:/ _/_       |:|  |        ___           ___
-         /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\
-        /:/__/      /:/  /  ___   /:/ /:/ _/_   __|:|  |      /:/__/        /:/  /
-       /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/ 
-       \/\:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/\:\  \__   /::\  \ 
-          \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \ 
-           \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \ 
-           /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\
-           \/__/       \/__/         \/__/         \/__/         \/__/         \/__/</pre>
+<pre class="ascii-art">   ___           ___           ___
+   /\__\         /\__\         /|  |
+   /:/  /        /:/ _/_       |:|  |        ___           ___
+  /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\
+ /:/  /  ___   /:/ /:/ _/_   __|:|  |      /:/__/        /:/  / 
+/:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/  
+\:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/\:\  \__   /::\  \  
+ \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \ 
+  \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \ 
+   \::/  /       \::/  /       \:\__\         /:/  /       \:\__\
+    \/__/         \/__/         \/__/         \/__/         \/__/ </pre>
 <p class="project-details">port of CacheKit to x86_64. evades memory introspection via cache incoherence using AMD l3_cat.</p>
 <p class="project-link"><a href="https://github.com/vmsplit/icekit">view source &rarr;</a></p>
 </div>
@@ -79,13 +80,13 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">coreboot + tboot measured launch research</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">                     __               __             _______ 
-               .----|  |--.-----.----|  |--.--------|   _   |
-               |  __|     |  -__|  __|    <|        |.  |   |
-               |____|__|__|_____|____|__|__|__|__|__|.  _   |
-                                                    |:  1   |
-                                                    |::.. . |
-                                                    `-------'</pre>
+<pre class="ascii-art">     __               __             _______
+.----|  |--.-----.----|  |--.--------|   _   |
+|  __|     |  -__|  __|    <|        |.  |   |
+|____|__|__|_____|____|__|__|__|__|__|.  _   |
+                                    |:  1   |
+                                    |::.. . |
+                                    `-------'</pre>
 <p class="project-details">intel TXT measured launch with coreboot firmware. trusted boot chain experiments.</p>
 <p class="project-link"><a href="https://github.com/vmsplit/checkm8">view source &rarr;</a></p>
 </div>
@@ -98,11 +99,11 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 </summary>
 <div class="project-content">
 <pre class="ascii-art">#################################
- ___ ___ _____   ____  __ __  __ 
+ ___ ___ _____   ____  __ __  __
 |_ _/ __| __\ \ / /  \/  |  \/  |
  | | (__| _| \ V /| |\/| | |\/| |
-|___\___|___| \_/ |_|  |_|_|  |_|   
-                                         
+|___\___|___| \_/ |_|  |_|_|  |_| 
+
 #################################</pre>
 <p class="project-details">baremetal type-1 hypervisor for arm64. EL2 virtualization experiments.</p>
 <p class="project-link"><a href="https://github.com/vmsplit/IceVMM">view source &rarr;</a></p>
@@ -115,10 +116,10 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">kernel-level defense research</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art"> ____   ___  _____  _____  _____  _____  _____  __ ___ _____  _____ 
+<pre class="ascii-art"> ____   ___  _____  _____  _____  _____  _____  __ ___ _____  _____
 /  _/  /___\/  _  \/   __\/  _  \/  _  \/     \|  |  //   __\/  _  \
 |  |---|   ||  |  ||   __||  _  <|  _  ||  |--||  _ < |   __||  _  <
-\_____\/___/\__|__/\_____\/_____\/__|__/\_____/|__|__\\_____\/__|\__/</pre>
+\_____\/___/\__|__\/_____\/_____\/__|__\/_____/|__|__\\_____\/__|\__/</pre>
 <p class="project-details">kernel-level defense research.</p>
 <p class="project-link"><a href="https://github.com/vmsplit/linebacker">view source &rarr;</a></p>
 </div>
@@ -145,12 +146,12 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">KVM exploitation PoC for ARM</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">                                .------..------..------..------..------.
-                                |K.--. ||V.--. ||M.--. ||R.--. ||K.--. |
-                                | :/\: || :(): || (\/ ) || :(): || :/\: |
-                                | :\/\: || ()() || :\/\: || ()() || :\/\: |
-                                | '--'K|| '--'V|| '--'M|| '--'R|| '--'K|
-                                `------'`------'`------'`------'`------'</pre>
+<pre class="ascii-art">.------..------..------..------..------.
+|K.--. ||V.--. ||M.--. ||R.--. ||K.--. |
+| :/\: || :(): || (\/ ) || :(): || :/\: |
+| :\/ : || ()() || :\/ : || ()() || :\/ : |
+| '--'K|| '--'V|| '--'M|| '--'R|| '--'K|
+`------'`------'`------'`------'`------'</pre>
 <p class="project-details">original implementation of Singh's KVM ARM security research.</p>
 <p class="project-link"><a href="https://github.com/3intermute/kvmrk">view source &rarr;</a></p>
 </div>
@@ -162,23 +163,23 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">hypervisor-based introspection evasion</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">         ___         ___         ___
-        /\  \       /\  \       /\  \
-       _\:\  \     _\:\  \     _\:\  \
-      /\/::\__\   /\/::\__\   /\/::\__\
-      \::/\/__/   \::/\/__/   \::/\/__/
+<pre class="ascii-art">     ___         ___         ___
+    /\  \       /\  \       /\  \
+   _\:\  \     _\:\  \     _\:\  \
+  /\/::\__\   /\/::\__\   /\/::\__\
+  \::/\/__/   \::/\/__/   \::/\/__/
+   \:\__\___   \:\__\___   \:\__\___
+    \/__/\  \   \/__/\  \   \/__/\  \
+       /::\  \     /::\  \     /::\  \
+      /:/\:\__\   /:/\:\__\   /:/\:\__\
+      \:\ \/__/   \:\ \/__/   \:\ \/__/
        \:\__\___   \:\__\___   \:\__\___
         \/__/\  \   \/__/\  \   \/__/\  \
            /::\  \     /::\  \     /::\  \
-          /:/\:\__\   /:/\:\__\   /:/\:\__\
-          \:\ \/__/   \:\ \/__/   \:\ \/__/
-           \:\__\___   \:\__\___   \:\__\___
-            \/__/\  \   \/__/\  \   \/__/\  \
-               /::\  \     /::\  \     /::\  \
-              /::\:\__\   /::\:\__\   /::\:\__\
-              \:\:\/  /   \:\:\/  /   \:\:\/  /
-               \:\/  /     \:\/  /     \:\/  /
-                \/__/       \/__/       \/__/</pre>
+          /::\:\__\   /::\:\__\   /::\:\__\
+          \:\:\/  /   \:\:\/  /   \:\:\/  /
+           \:\/  /     \:\/  /     \:\/  /
+            \/__/       \/__/       \/__/ </pre>
 <p class="project-details">hypervisor techniques for evading memory introspection.</p>
 <p class="project-link"><a href="https://github.com/3intermute/hvICE">view source &rarr;</a></p>
 </div>
@@ -190,11 +191,11 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">silent syscall hooking on arm64</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">            _        __    _
-  _______ _(_)__    / /__ (_)__  ___ _
- / __/ _ `/ / _ \  /  '_// / _ \/ _ `/
-/_/  \_,_/_/_//_/ /_/_\_\/__/\_, /
-                               /___/</pre>
+<pre class="ascii-art">        _        __    _
+_______ _(_)__    / /__ (_)__  ___ _
+/ __/ _ `/ / _ \  /  '_// / _ \/ _ `/
+/_/  \_,_/_/_//_/ /_/_\_\/__//_/_\_, /
+                              /___/  </pre>
 <p class="project-details">stealthy syscall interception without modifying syscall table.</p>
 <p class="project-link"><a href="https://github.com/3intermute/arm64_silent_syscall_hook">view source &rarr;</a></p>
 </div>
@@ -206,25 +207,25 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">arm64 rootkit research</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">                                             #
-                                         .%%( (
-                                      /%%%%%%    *#
-                                    ,%%%%%%%%       (
-                                 %%%%%%%%%%%%         ,(
-                              *%%%%%%%%%%%%%%,           (
-                           #&%%%%%%%%%%%%%%%&@@             /
-                         #%%%%%%%%%%&@  %%%%  %%%%%%@,        &
-                      %%%%%%@.*%%%%%%%%%%%%% (%%%%%%%%%%%%%@     *
-                    *%%%%%%%%%%%%%%%%%%%%%%% &&%%%%%%%%%%%%%%%%%%%&*/
-                      /@@@@%%%%%%%%%%%%%%%%& %&%%%%%%%%%%%%%%%%%%&,
-                        ,#@@@@@@@&%%%%%%%%%&.%&%%%%%%&%%%%%%%%% (
-                            @@@@@@@@@@@@%%%& %%%%%%%%%%%%%%%,
-                              #@@@@@@@@@@&@% %%%%%%%%%%%%&/
-                                 (@@@@@@&@@@ %%%%%%%%%%,
-                                   *@@@@@@@@ %%%%%%%//
-                                       &@@@@ %%%%%/
-                                         /@@*%%*
-                                            @</pre>
+<pre class="ascii-art">                                         #
+                                     .%%( (
+                                  /%%%%%%    *#
+                                ,%%%%%%%%       (
+                             %%%%%%%%%%%%         ,(
+                          *%%%%%%%%%%%%%%,           (
+                       #&%%%%%%%%%%%%%%%&@@             /
+                     #%%%%%%%%%%&@  %%%%  %%%%%%@,        &
+                  %%%%%%@.*%%%%%%%%%%%%% (%%%%%%%%%%%%%@     *
+                *%%%%%%%%%%%%%%%%%%%%%%% &&%%%%%%%%%%%%%%%%%%%&*/
+                  /@@@@%%%%%%%%%%%%%%%%& %&%%%%%%%%%%%%%%%%%%&,
+                    ,#@@@@@@@&%%%%%%%%%&.%&%%%%%%&%%%%%%%%% (
+                        @@@@@@@@@@@@%%%& %%%%%%%%%%%%%%%,
+                          #@@@@@@@@@@&@% %%%%%%%%%%%%&/
+                             (@@@@@@&@@@ %%%%%%%%%%,
+                               *@@@@@@@@ %%%%%%%//
+                                   &@@@@ %%%%%/
+                                     /@@*%%*
+                                        @</pre>
 <p class="project-details">kernel-level persistence and evasion techniques for arm64 linux.</p>
 <p class="project-link"><a href="https://github.com/3intermute/ramiel">view source &rarr;</a></p>
 </div>
