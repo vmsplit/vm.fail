@@ -120,6 +120,90 @@ details.project[open] summary::before {
   font-size: 0.75rem;
 }
 
+.code-search {
+  margin: 0.5rem 0 0.5rem 2rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.code-search input,
+.code-search select,
+.code-search button {
+  font-family: inherit;
+  font-size: 0.875rem;
+  background: transparent;
+  color: var(--c-fg);
+  border: 1px dashed var(--c-border);
+  padding: 0.25rem 0.5rem;
+  outline: none;
+}
+
+.code-search input {
+  flex: 1;
+  min-width: 12rem;
+}
+
+.code-search input::placeholder {
+  color: var(--c-fg-dim);
+}
+
+.code-search input:focus,
+.code-search select:focus {
+  border-color: var(--c-accent);
+}
+
+.code-search select {
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding-right: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%239b9bb1' d='M3 4l3 4 3-4'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+}
+
+.code-search button {
+  cursor: pointer;
+  color: var(--c-accent);
+  border-color: var(--c-accent);
+  transition: background 0.15s, color 0.15s;
+}
+
+.code-search button:hover {
+  background: var(--c-accent);
+  color: var(--c-bg);
+}
+
+#search-results {
+  margin: 0.5rem 0 1rem 2rem;
+}
+
+#search-results .search-results-list {
+  margin: 0;
+  padding: 0 0 0 1rem;
+}
+
+#search-results .search-results-list li {
+  margin: 0.25rem 0;
+  font-size: 0.875rem;
+}
+
+#search-results .search-results-list li::before {
+  content: "* ";
+  color: var(--c-secondary);
+}
+
+#search-results .search-results-list a {
+  color: var(--c-hi-1);
+}
+
+#search-results .search-results-list a:hover {
+  color: var(--c-accent);
+}
+
 @media (max-width: 720px) {
   main {
     padding: 1rem 1rem 4rem;
@@ -135,5 +219,19 @@ details.project[open] summary::before {
 
   .ascii-art, .ascii-banner {
     font-size: 0.35rem;
+  }
+
+  .code-search {
+    margin-left: 1rem;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .code-search input {
+    min-width: auto;
+  }
+
+  #search-results {
+    margin-left: 1rem;
   }
 }
