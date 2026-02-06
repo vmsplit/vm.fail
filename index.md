@@ -91,6 +91,7 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 
 <script>
 (function() {
+  var WORKER_URL = 'https://vm-fail.torsten-oehlenschlager.workers.dev';
   var searchBtn = document.getElementById('search-btn');
   var searchInput = document.getElementById('search-input');
   var repoSelect = document.getElementById('repo-select');
@@ -103,11 +104,18 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
       resultsDiv.innerHTML = '<p class="dim">select a repository and enter a search term</p>';
       return;
     }
-    var url = 'https://api.github.com/search/code?q=' + encodeURIComponent(query + ' repo:' + repo);
     resultsDiv.innerHTML = '<p class="dim">searching...</p>';
-    fetch(url, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
+    fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: query + ' repo:' + repo })
+    })
       .then(function(r) { return r.json(); })
       .then(function(data) {
+        if (data.error) {
+          resultsDiv.innerHTML = '<p class="dim">error: ' + data.error + '</p>';
+          return;
+        }
         if (!data.items || data.items.length === 0) {
           resultsDiv.innerHTML = '<p class="dim">no results</p>';
           return;
