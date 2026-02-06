@@ -72,6 +72,63 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 </details>
 {% endfor %}
 
+# icekit
+
+<pre class="ascii-art">
+                                   ___           ___           ___                                
+                                  /\__\         /\__\         /|  |                           
+                     ___         /:/  /        /:/ _/_       |:|  |        ___           ___     
+                    /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\    
+                   /:/__/      /:/  /  ___   /:/ /:/ _/_    _|:|  |      /:/__/        /:/  /    
+                  /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/     
+                  \/:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/:\  \__   /::\  \     
+                     \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \    
+                      \::/  /   \:\/:/  /     \:\/:/  /     \:\__\         /:/  /       \:\__\  
+                      /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\  
+                      \/__/       \/__/         \/__/         \/__/         \/__/         \/__/     
+</pre>
+
+<p class="dim">cache-as-ram + CAT L3 cache line locking on x86_64. evades memory introspection via cache incoherence.</p>
+
+# checkm8
+
+<pre class="ascii-art">
+                     __               __             _______ 
+               .----|  |--.-----.----|  |--.--------|   _   |
+               |  __|     |  -__|  __|    <|        |.  |   |
+               |____|__|__|_____|____|__|__|__|__|__|.  _   |
+                                                    |:  1   |
+                                                    |::.. . |
+                                                    `-------'
+</pre>
+
+<p class="dim">coreboot + tboot measured launch research. intel TXT trusted boot chain.</p>
+
+# icevmm
+
+<pre class="ascii-art">
+#################################
+ ___ ___ _____   ____  __ __  __ 
+|_ _/ __| __\ \ / /  \/  |  \/  |
+ | | (__| _| \ V /| |\/| | |\/| |
+|___\___|___| \_/ |_|  |_|_|  |_|   
+                                         
+#################################
+</pre>
+
+<p class="dim">minimal arm64 type-1 hypervisor. EL2 virtualization experiments.</p>
+
+# linebacker
+
+<pre class="ascii-art">
+ ____   ___  _____  _____  _____  _____  _____  __ ___ _____  _____ 
+/  _/  /___\/  _  \/   __\/  _  \/  _  \/     \|  |  //   __\/  _  \
+|  |---|   ||  |  ||   __||  _  <|  _  ||  |--||  _ < |   __||  _  <
+\_____\/___/\__|__/\_____\/_____\/__|__/\_____/_|__|__\_____\/__|\_/
+</pre>
+
+<p class="dim">kernel-level defense research.</p>
+
 # hvICE
 
 <pre class="ascii-art">
@@ -96,6 +153,56 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 
 <p class="dim">hypervisor-enforced kernel integrity via EPT write protection. xen + libvmi.</p>
 
+# kvmrk
+
+<pre class="ascii-art">
+                                .------..------..------..------..------.
+                                |K.--. ||V.--. ||M.--. ||R.--. ||K.--. |
+                                | :/\: || :(): || (\/ ) || :(): || :/\: |
+                                | :\/\: || ()() || :\/\: || ()() || :\/\: |
+                                | '--'K|| '--'V|| '--'M|| '--'R|| '--'K|
+                                `------'`------'`------'`------'`------'
+</pre>
+
+<p class="dim">KVM exploitation PoC for ARM. based on Singh's research.</p>
+
+# arm64_silent_syscall_hook
+
+<pre class="ascii-art">
+            _        __    _
+  _______ _(_)__    / /__ (_)__  ___ _
+ / __/ _ `/ / _ \  /  '_// / _ \/ _ `/
+/_/  \_,_/_/_//_/ /_/_\_\/ _//_/_\_, /
+                               /___/
+</pre>
+
+<p class="dim">stealthy syscall interception without modifying syscall table.</p>
+
+# ramiel
+
+<pre class="ascii-art">
+                                             #
+                                         .%%( (
+                                      /%%%%%%    *#
+                                    ,%%%%%%%%       (
+                                 %%%%%%%%%%%%         ,(
+                              *%%%%%%%%%%%%%%,           (
+                           #&%%%%%%%%%%%%%%%&@@             /
+                         #%%%%%%%%%%&@  %%%%  %%%%%%@,        &
+                      %%%%%%@.*%%%%%%%%%%%%% (%%%%%%%%%%%%%@     *
+                    *%%%%%%%%%%%%%%%%%%%%%%% &&%%%%%%%%%%%%%%%%%%%&*/
+                      /@@@@%%%%%%%%%%%%%%%%& %&%%%%%%%%%%%%%%%%%%&,
+                        ,#@@@@@@@&%%%%%%%%%&.%&%%%%%%&%%%%%%%%% (
+                            @@@@@@@@@@@@%%%& %%%%%%%%%%%%%%%,
+                              #@@@@@@@@@@&@% %%%%%%%%%%%%&/
+                                 (@@@@@@&@@@ %%%%%%%%%%,
+                                   *@@@@@@@@ %%%%%%%//
+                                       &@@@@ %%%%%/
+                                         /@@*%%*
+                                            @
+</pre>
+
+<p class="dim">arm64 rootkit research. kernel-level persistence and evasion.</p>
 <script>
 (function() {
   var WORKER_URL = 'https://vm-fail.torsten-oehlenschlager.workers.dev';
