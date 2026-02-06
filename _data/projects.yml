@@ -38,7 +38,7 @@ wintermute:
   - name: arm64_silent_syscall_hook
     url: https://github.com/3intermute/arm64_silent_syscall_hook
     desc: silent syscall hooking via exception handler patching
-    details: "hooks without modifying sys_call_table or handlers. patches exception vectors directly. featured in tmp.0ut vol3."
+    details: "hooks without modifying sys_call_table or handlers. patches exception vectors directly."
 
   - name: linux_syscall_hook
     url: https://github.com/3intermute/linux_syscall_hook
