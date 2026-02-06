@@ -3,10 +3,12 @@ layout: default
 ---
 
 <pre class="ascii-banner">
-            ___       ___
- __ ____ _ / _|__ _(_) |
- \ V / _` ||  _/ _` | | |
-  \_/\__,_||_| \__,_|_|_|
+            __   __   __         _  _ 
+ __   __ _ |  \_|  | / _|  __ _ (_)| |
+ \ \ / /| '_ ` _ \ | |   | || |_  / _` || || |
+  \ V / | | | | | || | _ | ||  _|| (_| || || |
+   \_/  |_| |_| |_||_|(_)|_||_|   \__,_||_||_|
+                   |__| |__|                  
 </pre>
 
 <p><span class="hi">vm.fail</span> <span class="dim">{low-level systems research}</span></p>
@@ -38,101 +40,129 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 
 # projects
 
-{% for p in site.data.projects.self %}
 <details class="project">
 <summary>
-<span class="project-name">~ {{ p.name }}</span>{% if p.wip %}<span class="tag tag--wip">[wip]</span>{% endif %}{% if p.archived %}<span class="tag tag--archived">[archived]</span>{% endif %}
-<span class="project-desc dim">{{ p.desc }}</span>
+<span class="project-name">~ nebula</span>
+<span class="project-desc dim">arm64 linux position-independent shellcode framework</span>
 </summary>
 <div class="project-content">
-
-<p class="project-details">{{ p.details }}</p>
-
-<p class="project-link"><a href="{{ p.url }}">view source &rarr;</a></p>
+<p class="project-details">resolves symbols at runtime via /proc/self/maps parsing. djb2 hash for module/symbol lookup. inline syscalls.</p>
+<p class="project-link"><a href="https://github.com/vmsplit/nebula">view source &rarr;</a></p>
 </div>
 </details>
-{% endfor %}
 
-# collaborators
-
-## ~ wintermute
-
-{% for p in site.data.projects.wintermute %}
 <details class="project">
 <summary>
-<span class="project-name">{{ p.name }}</span>{% if p.wip %}<span class="tag tag--wip">[wip]</span>{% endif %}{% if p.archived %}<span class="tag tag--archived">[archived]</span>{% endif %}
-<span class="project-desc dim">{{ p.desc }}</span>
+<span class="project-name">~ icekit</span>
+<span class="project-desc dim">cache-as-ram + CAT L3 cache line locking on x86_64</span>
 </summary>
 <div class="project-content">
-
-<p class="project-details">{{ p.details }}</p>
-
-<p class="project-link"><a href="{{ p.url }}">view source &rarr;</a></p>
+<pre class="ascii-art">                       ___           ___           ___
+                       /\__\         /\__\         /|  |
+          ___         /:/  /        /:/ _/_       |:|  |        ___           ___
+         /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\
+        /:/__/      /:/  /  ___   /:/ /:/ _/_   __|:|  |      /:/__/        /:/  /
+       /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/ 
+       \/\:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/\:\  \__   /::\  \ 
+          \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \ 
+           \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \ 
+           /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\
+           \/__/       \/__/         \/__/         \/__/         \/__/         \/__/</pre>
+<p class="project-details">port of CacheKit to x86_64. evades memory introspection via cache incoherence using AMD l3_cat.</p>
+<p class="project-link"><a href="https://github.com/vmsplit/icekit">view source &rarr;</a></p>
 </div>
 </details>
-{% endfor %}
 
-# icekit
-
-<pre class="ascii-art">
-                                   ___           ___           ___                                
-                                  /\__\         /\__\         /|  |                           
-                     ___         /:/  /        /:/ _/_       |:|  |        ___           ___     
-                    /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\    
-                   /:/__/      /:/  /  ___   /:/ /:/ _/_    _|:|  |      /:/__/        /:/  /    
-                  /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/     
-                  \/:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/:\  \__   /::\  \     
-                     \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \    
-                      \::/  /   \:\/:/  /     \:\/:/  /     \:\__\         /:/  /       \:\__\  
-                      /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\  
-                      \/__/       \/__/         \/__/         \/__/         \/__/         \/__/     
-</pre>
-
-<p class="dim">cache-as-ram + CAT L3 cache line locking on x86_64. evades memory introspection via cache incoherence.</p>
-
-# checkm8
-
-<pre class="ascii-art">
-                     __               __             _______ 
+<details class="project">
+<summary>
+<span class="project-name">~ checkm8</span>
+<span class="project-desc dim">coreboot + tboot measured launch research</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art">                     __               __             _______ 
                .----|  |--.-----.----|  |--.--------|   _   |
                |  __|     |  -__|  __|    <|        |.  |   |
                |____|__|__|_____|____|__|__|__|__|__|.  _   |
                                                     |:  1   |
                                                     |::.. . |
-                                                    `-------'
-</pre>
+                                                    `-------'</pre>
+<p class="project-details">intel TXT measured launch with coreboot firmware. trusted boot chain experiments.</p>
+<p class="project-link"><a href="https://github.com/vmsplit/checkm8">view source &rarr;</a></p>
+</div>
+</details>
 
-<p class="dim">coreboot + tboot measured launch research. intel TXT trusted boot chain.</p>
-
-# icevmm
-
-<pre class="ascii-art">
-#################################
+<details class="project">
+<summary>
+<span class="project-name">~ icevmm</span><span class="tag tag--wip">[wip]</span>
+<span class="project-desc dim">minimal arm64 hypervisor</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art">#################################
  ___ ___ _____   ____  __ __  __ 
 |_ _/ __| __\ \ / /  \/  |  \/  |
  | | (__| _| \ V /| |\/| | |\/| |
 |___\___|___| \_/ |_|  |_|_|  |_|   
                                          
-#################################
-</pre>
+#################################</pre>
+<p class="project-details">baremetal type-1 hypervisor for arm64. EL2 virtualization experiments.</p>
+<p class="project-link"><a href="https://github.com/vmsplit/IceVMM">view source &rarr;</a></p>
+</div>
+</details>
 
-<p class="dim">minimal arm64 type-1 hypervisor. EL2 virtualization experiments.</p>
-
-# linebacker
-
-<pre class="ascii-art">
- ____   ___  _____  _____  _____  _____  _____  __ ___ _____  _____ 
+<details class="project">
+<summary>
+<span class="project-name">~ linebacker</span><span class="tag tag--wip">[wip]</span>
+<span class="project-desc dim">kernel-level defense research</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art"> ____   ___  _____  _____  _____  _____  _____  __ ___ _____  _____ 
 /  _/  /___\/  _  \/   __\/  _  \/  _  \/     \|  |  //   __\/  _  \
 |  |---|   ||  |  ||   __||  _  <|  _  ||  |--||  _ < |   __||  _  <
-\_____\/___/\__|__/\_____\/_____\/__|__/\_____/_|__|__\_____\/__|\_/
-</pre>
+\_____\/___/\__|__/\_____\/_____\/__|__/\_____/|__|__\\_____\/__|\__/</pre>
+<p class="project-details">kernel-level defense research.</p>
+<p class="project-link"><a href="https://github.com/vmsplit/linebacker">view source &rarr;</a></p>
+</div>
+</details>
 
-<p class="dim">kernel-level defense research.</p>
+<details class="project">
+<summary>
+<span class="project-name">~ kvmrsk</span>
+<span class="project-desc dim">rust rewrite of kvmrk KVM exploitation PoC</span>
+</summary>
+<div class="project-content">
+<p class="project-details">based on Singh's paper on KVM's insecure design on ARM.</p>
+<p class="project-link"><a href="https://github.com/vmsplit/kvmrsk">view source &rarr;</a></p>
+</div>
+</details>
 
-# hvICE
+# collaborators
 
-<pre class="ascii-art">
-         ___         ___         ___
+## ~ wintermute
+
+<details class="project">
+<summary>
+<span class="project-name">kvmrk</span>
+<span class="project-desc dim">KVM exploitation PoC for ARM</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art">                                .------..------..------..------..------.
+                                |K.--. ||V.--. ||M.--. ||R.--. ||K.--. |
+                                | :/\: || :(): || (\/ ) || :(): || :/\: |
+                                | :\/\: || ()() || :\/\: || ()() || :\/\: |
+                                | '--'K|| '--'V|| '--'M|| '--'R|| '--'K|
+                                `------'`------'`------'`------'`------'</pre>
+<p class="project-details">original implementation of Singh's KVM ARM security research.</p>
+<p class="project-link"><a href="https://github.com/3intermute/kvmrk">view source &rarr;</a></p>
+</div>
+</details>
+
+<details class="project">
+<summary>
+<span class="project-name">hvICE</span>
+<span class="project-desc dim">hypervisor-based introspection evasion</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art">         ___         ___         ___
         /\  \       /\  \       /\  \
        _\:\  \     _\:\  \     _\:\  \
       /\/::\__\   /\/::\__\   /\/::\__\
@@ -147,41 +177,36 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
                /::\  \     /::\  \     /::\  \
               /::\:\__\   /::\:\__\   /::\:\__\
               \:\:\/  /   \:\:\/  /   \:\:\/  /
-               \:\/  /     \:\/  /     \:\/  / 
-                \/__/       \/__/       \/__/ 
-</pre>
+               \:\/  /     \:\/  /     \:\/  /
+                \/__/       \/__/       \/__/</pre>
+<p class="project-details">hypervisor techniques for evading memory introspection.</p>
+<p class="project-link"><a href="https://github.com/3intermute/hvICE">view source &rarr;</a></p>
+</div>
+</details>
 
-<p class="dim">hypervisor-enforced kernel integrity via EPT write protection. xen + libvmi.</p>
-
-# kvmrk
-
-<pre class="ascii-art">
-                                .------..------..------..------..------.
-                                |K.--. ||V.--. ||M.--. ||R.--. ||K.--. |
-                                | :/\: || :(): || (\/ ) || :(): || :/\: |
-                                | :\/\: || ()() || :\/\: || ()() || :\/\: |
-                                | '--'K|| '--'V|| '--'M|| '--'R|| '--'K|
-                                `------'`------'`------'`------'`------'
-</pre>
-
-<p class="dim">KVM exploitation PoC for ARM. based on Singh's research.</p>
-
-# arm64_silent_syscall_hook
-
-<pre class="ascii-art">
-            _        __    _
+<details class="project">
+<summary>
+<span class="project-name">arm64_silent_syscall_hook</span>
+<span class="project-desc dim">silent syscall hooking on arm64</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art">            _        __    _
   _______ _(_)__    / /__ (_)__  ___ _
  / __/ _ `/ / _ \  /  '_// / _ \/ _ `/
-/_/  \_,_/_/_//_/ /_/_\_\/ _//_/_\_, /
-                               /___/
-</pre>
+/_/  \_,_/_/_//_/ /_/_\_\/__/\_, /
+                               /___/</pre>
+<p class="project-details">stealthy syscall interception without modifying syscall table.</p>
+<p class="project-link"><a href="https://github.com/3intermute/arm64_silent_syscall_hook">view source &rarr;</a></p>
+</div>
+</details>
 
-<p class="dim">stealthy syscall interception without modifying syscall table.</p>
-
-# ramiel
-
-<pre class="ascii-art">
-                                             #
+<details class="project">
+<summary>
+<span class="project-name">ramiel</span>
+<span class="project-desc dim">arm64 rootkit research</span>
+</summary>
+<div class="project-content">
+<pre class="ascii-art">                                             #
                                          .%%( (
                                       /%%%%%%    *#
                                     ,%%%%%%%%       (
@@ -199,10 +224,12 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
                                    *@@@@@@@@ %%%%%%%//
                                        &@@@@ %%%%%/
                                          /@@*%%*
-                                            @
-</pre>
+                                            @</pre>
+<p class="project-details">kernel-level persistence and evasion techniques for arm64 linux.</p>
+<p class="project-link"><a href="https://github.com/3intermute/ramiel">view source &rarr;</a></p>
+</div>
+</details>
 
-<p class="dim">arm64 rootkit research. kernel-level persistence and evasion.</p>
 <script>
 (function() {
   var WORKER_URL = 'https://vm-fail.torsten-oehlenschlager.workers.dev';
