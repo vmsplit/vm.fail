@@ -263,12 +263,40 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
           resultsDiv.innerHTML = '<p class="dim">no results</p>';
           return;
         }
-        var html = '<ul class="search-results-list">';
+        var parts = repo.split('/');
+        var owner = parts[0];
+        var repoName = parts[1];
+
+        var ul = document.createElement('ul');
+        ul.className = 'search-results-list';
         data.items.slice(0, 10).forEach(function(item) {
-          html += '<li><a href="' + item.html_url + '">' + item.path + '</a></li>';
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.textContent = item.path;
+          a.dataset.owner = owner;
+          a.dataset.repo = repoName;
+          a.dataset.path = item.path;
+          a.dataset.url = item.html_url;
+          li.appendChild(a);
+          ul.appendChild(li);
         });
-        html += '</ul>';
-        resultsDiv.innerHTML = html;
+        resultsDiv.innerHTML = '';
+        resultsDiv.appendChild(ul);
+
+        // Event delegation for clicks
+        resultsDiv.onclick = function(e) {
+          var target = e.target;
+          if (target.tagName === 'A' && target.dataset.path) {
+            e.preventDefault();
+            e.stopPropagation();
+            window.vmfailOpenViewer(
+              target.dataset.owner,
+              target.dataset.repo,
+              target.dataset.path,
+              target.dataset.url
+            );
+          }
+        };
       })
       .catch(function(e) {
         resultsDiv.innerHTML = '<p class="dim">error: ' + e.message + '</p>';
