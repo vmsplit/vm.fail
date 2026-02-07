@@ -264,6 +264,10 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
           return;
         }
         var parts = repo.split('/');
+        if (parts.length !== 2) {
+          resultsDiv.innerHTML = '<p class="dim">invalid repository format</p>';
+          return;
+        }
         var owner = parts[0];
         var repoName = parts[1];
 
@@ -282,26 +286,26 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
         });
         resultsDiv.innerHTML = '';
         resultsDiv.appendChild(ul);
-
-        // Event delegation for clicks
-        resultsDiv.onclick = function(e) {
-          var target = e.target;
-          if (target.tagName === 'A' && target.dataset.path) {
-            e.preventDefault();
-            e.stopPropagation();
-            window.vmfailOpenViewer(
-              target.dataset.owner,
-              target.dataset.repo,
-              target.dataset.path,
-              target.dataset.url
-            );
-          }
-        };
       })
       .catch(function(e) {
         resultsDiv.innerHTML = '<p class="dim">error: ' + e.message + '</p>';
       });
   }
+
+  // Event delegation for search result clicks (set up once)
+  resultsDiv.onclick = function(e) {
+    var target = e.target;
+    if (target.tagName === 'A' && target.dataset.path) {
+      e.preventDefault();
+      e.stopPropagation();
+      window.vmfailOpenViewer(
+        target.dataset.owner,
+        target.dataset.repo,
+        target.dataset.path,
+        target.dataset.url
+      );
+    }
+  };
 
   searchBtn.addEventListener('click', searchCode);
   searchInput.addEventListener('keypress', function(e) {
