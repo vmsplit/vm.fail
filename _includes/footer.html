@@ -4,18 +4,146 @@
   <span><button id="theme-toggle" aria-label="toggle theme"></button></span>
 </footer>
 
+<div id="code-viewer-overlay" class="code-viewer-overlay">
+  <div class="code-viewer">
+    <div class="code-viewer-header">
+      <span class="code-viewer-title" id="code-viewer-title"></span>
+      <button class="code-viewer-close" id="code-viewer-close">[x]</button>
+    </div>
+    <div class="code-viewer-body" id="code-viewer-body">
+      <div class="code-viewer-loading">loading...</div>
+    </div>
+    <div class="code-viewer-meta" id="code-viewer-meta"></div>
+  </div>
+</div>
+
 <script>
 (function() {
   var root = document.documentElement;
   var toggle = document.getElementById('theme-toggle');
   var stored = localStorage.getItem('theme');
-
   if (stored) root.dataset.theme = stored;
-
   toggle.addEventListener('click', function() {
     var next = root.dataset.theme === 'dark' ? 'light' : 'dark';
     root.dataset.theme = next;
     localStorage.setItem('theme', next);
   });
+
+  var overlay = document.getElementById('code-viewer-overlay');
+  var viewerTitle = document.getElementById('code-viewer-title');
+  var viewerBody = document.getElementById('code-viewer-body');
+  var viewerMeta = document.getElementById('code-viewer-meta');
+  var closeBtn = document.getElementById('code-viewer-close');
+
+  function closeViewer() {
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  closeBtn.addEventListener('click', closeViewer);
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) closeViewer();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeViewer();
+  });
+
+  function highlightCode(code, lang) {
+    var kw = /\b(if|else|for|while|do|switch|case|break|continue|return|goto|typedef|struct|union|enum|static|const|volatile|extern|inline|register|restrict|signed|unsigned|sizeof|void|int|char|short|long|float|double|bool|true|false|null|NULL|nullptr|class|public|private|protected|virtual|override|final|new|delete|this|try|catch|throw|template|typename|namespace|using|auto|decltype|constexpr|noexcept|static_assert|alignof|alignas|asm|register_t|uint8_t|uint16_t|uint32_t|uint64_t|int8_t|int16_t|int32_t|int64_t|size_t|ssize_t|ptrdiff_t|uintptr_t|intptr_t|i8|i16|i32|i64|u8|u16|u32|u64|fn|let|mut|pub|mod|use|impl|trait|where|match|loop|move|ref|self|Self|crate|super|dyn|async|await|unsafe|type|const|static|extern|as|in|continue|break|return|if|else|for|while|loop|match)\b/g;
+    var ty = /\b([A-Z][a-zA-Z0-9_]*(?:_t)?)\b/g;
+    var str = /(["'])(?:(?!\1|\\).|\\.)*\1/g;
+    var cmt = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|#[^\n]*)/g;
+    var num = /\b(0x[0-9a-fA-F]+|0b[01]+|0o[0-7]+|\\d+(?:\\.\\d+)?(?:[eE][+-]?\\d+)?[fFlLuU]*)\b/g;
+    var pre = /^(\s*#\s*(?:include|define|ifdef|ifndef|endif|if|else|elif|undef|pragma|error|warning)[^\n]*)/gm;
+
+    var esc = code.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+    esc = esc.replace(cmt, '<span class="hl-comment">$1</span>');
+    esc = esc.replace(pre, '<span class="hl-preprocessor">$1</span>');
+    esc = esc.replace(str, '<span class="hl-string">$&</span>');
+    esc = esc.replace(kw, '<span class="hl-keyword">$1</span>');
+    esc = esc.replace(ty, '<span class="hl-type">$1</span>');
+    esc = esc.replace(num, '<span class="hl-number">$1</span>');
+    return esc;
+  }
+
+  function openViewer(owner, repo, path, url) {
+    overlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    viewerTitle.textContent = path;
+    viewerBody.innerHTML = '<div class="code-viewer-loading">loading...</div>';
+    viewerMeta.innerHTML = '<a href="' + url + '" target="_blank">view on github</a>';
+
+    var apiUrl = 'https://api.github.com/repos/' + owner + '/' + repo + '/contents/' + encodeURIComponent(path);
+    fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3.raw' } })
+      .then(function(r) {
+        if (!r.ok) throw new Error('failed to fetch');
+        return r.text();
+      })
+      .then(function(code) {
+        var lines = code.split('\n');
+        var lineNums = lines.map(function(_, i) { return i + 1; }).join('\n');
+        var ext = path.split('.').pop().toLowerCase();
+        var highlighted = highlightCode(code, ext);
+        viewerBody.innerHTML = '<pre class="code-viewer-content"><div class="code-viewer-lines">' + lineNums + '</div><code class="code-viewer-code">' + highlighted + '</code></pre>';
+      })
+      .catch(function(err) {
+        viewerBody.innerHTML = '<div class="code-viewer-error">failed to load file</div>';
+      });
+  }
+
+  window.vmfailOpenViewer = openViewer;
+
+  var searchBtn = document.getElementById('search-btn');
+  var searchInput = document.getElementById('search-input');
+  var repoSelect = document.getElementById('repo-select');
+  var resultsDiv = document.getElementById('search-results');
+
+  if (searchBtn) {
+    searchBtn.addEventListener('click', doSearch);
+    searchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') doSearch();
+    });
+  }
+
+  function doSearch() {
+    var q = searchInput.value.trim();
+    var repo = repoSelect.value;
+    if (!q || !repo) {
+      resultsDiv.innerHTML = '<p class="dim">enter query and select repo</p>';
+      return;
+    }
+    resultsDiv.innerHTML = '<p class="dim">searching...</p>';
+    var parts = repo.split('/');
+    var owner = parts[0];
+    var repoName = parts[1];
+    var apiUrl = 'https://api.github.com/search/code?q=' + encodeURIComponent(q) + '+repo:' + repo;
+    fetch(apiUrl, { headers: { 'Accept': 'application/vnd.github.v3+json' } })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.items || data.items.length === 0) {
+          resultsDiv.innerHTML = '<p class="dim">no results</p>';
+          return;
+        }
+        var ul = document.createElement('ul');
+        ul.className = 'search-results-list';
+        data.items.slice(0, 15).forEach(function(item) {
+          var li = document.createElement('li');
+          var a = document.createElement('a');
+          a.textContent = item.path;
+          a.href = 'javascript:void(0)';
+          a.onclick = function(e) {
+            e.preventDefault();
+            vmfailOpenViewer(owner, repoName, item.path, item.html_url);
+          };
+          li.appendChild(a);
+          ul.appendChild(li);
+        });
+        resultsDiv.innerHTML = '';
+        resultsDiv.appendChild(ul);
+      })
+      .catch(function() {
+        resultsDiv.innerHTML = '<p class="dim">search failed</p>';
+      });
+  }
 })();
 </script>
