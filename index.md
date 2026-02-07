@@ -3,7 +3,7 @@ layout: default
 ---
 
 <pre class="ascii-banner">
-                  __           _  _
+              __           _  _
  _  __ _ __ ___  / _| __ _.   (_)| |
 \ \/ /| '_ ` _ \| |_ / _` |   | || |
  \  / | | | | | |  _| (_| | _ | || |
@@ -59,17 +59,17 @@ contact: [torsten.oehlenschlager@tutanota.de](mailto:torsten.oehlenschlager@tuta
 <span class="project-desc dim">cache-as-ram + CAT L3 cache line locking on x86_64</span>
 </summary>
 <div class="project-content">
-<pre class="ascii-art">                                   ___           ___           ___                               
+<pre class="ascii-art">                                   ___           ___           ___                                
                                   /\__\         /\__\         /|  |                           
                      ___         /:/  /        /:/ _/_       |:|  |        ___           ___     
                     /\__\       /:/  /        /:/ /\__\      |:|  |       /\__\         /\__\    
                    /:/__/      /:/  /  ___   /:/ /:/ _/_    _|:|  |      /:/__/        /:/  /    
-                  /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/     
-                  \/:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/:\  \__   /::\  \     
-                     \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \    
-                      \::/  /   \:\/:/  /     \:\/:/  /     \:\__\         /:/  /       \:\__\  
-                      /:/  /     \::/  /       \::/  /       \:\__\        /:/  /       \:\__\  
-                      \/__/       \/__/         \/__/         \/__/        \/__/         \/__/</pre>
+                  /::\  \     /:/__/  /\__\ /:/_/:/ /\__\ /\ |:|__|____ /::\  \       /:/__/ 
+                  \/\:\  \__  \:\  \ /:/  / \:\/:/ /:/  / \:\/::::/__/ \/:\  \__   /::\  \ 
+                     \:\/\__\  \:\  /:/  /   \::/_/:/  /   \::/~~/~        \:\/\__\ /:/\:\  \ 
+                      \::/  /   \:\/:/  /     \:\/:/  /     \:\~~\          \::/  / \/__\:\  \ 
+                     /:/  /     \::/  /       \::/  /       \:\__\         /:/  /       \:\__\
+                     \/__/       \/__/         \/__/         \/__/         \/__/         \/__/</pre>
 <p class="project-details">port of CacheKit to x86_64. evades memory introspection via cache incoherence using AMD l3_cat.</p>
 <p class="project-link"><a href="https://github.com/vmsplit/icekit">view source &rarr;</a></p>
 </div>
