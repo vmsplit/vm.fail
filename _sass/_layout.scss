@@ -198,9 +198,149 @@ details.project[open] summary::before {
 
 #search-results .search-results-list a {
   color: var(--c-hi-1);
+  cursor: pointer;
 }
 
 #search-results .search-results-list a:hover {
+  color: var(--c-accent);
+}
+
+.code-viewer-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.code-viewer-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.code-viewer {
+  width: 90%;
+  max-width: 80ch;
+  max-height: 85vh;
+  background: var(--c-bg);
+  border: 1px solid var(--c-border);
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 0 2rem rgba(0, 0, 0, 0.5);
+}
+
+.code-viewer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px dashed var(--c-border);
+  background: var(--c-bg-alt);
+}
+
+.code-viewer-title {
+  font-size: 0.875rem;
+  color: var(--c-hi-1);
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.code-viewer-close {
+  background: transparent;
+  border: 1px dashed var(--c-border);
+  color: var(--c-fg-dim);
+  font-family: inherit;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+}
+
+.code-viewer-close:hover {
+  color: var(--c-accent);
+  border-color: var(--c-accent);
+}
+
+.code-viewer-body {
+  flex: 1;
+  overflow: auto;
+  padding: 0;
+}
+
+.code-viewer-content {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  overflow-x: auto;
+}
+
+.code-viewer-lines {
+  padding: 1rem 0.75rem;
+  text-align: right;
+  color: var(--c-fg-dim);
+  background: var(--c-bg-alt);
+  border-right: 1px solid var(--c-border);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.code-viewer-code {
+  padding: 1rem;
+  flex: 1;
+  overflow-x: auto;
+  white-space: pre;
+  color: var(--c-fg);
+}
+
+.code-viewer-code .hl-keyword { color: var(--c-accent); }
+.code-viewer-code .hl-type { color: var(--c-hi-1); }
+.code-viewer-code .hl-string { color: var(--c-hi-2); }
+.code-viewer-code .hl-comment { color: var(--c-fg-dim); font-style: italic; }
+.code-viewer-code .hl-number { color: var(--c-secondary); }
+.code-viewer-code .hl-function { color: var(--c-hi-1); }
+.code-viewer-code .hl-preprocessor { color: var(--c-accent); }
+.code-viewer-code .hl-operator { color: var(--c-fg-mid); }
+
+.code-viewer-loading {
+  padding: 2rem;
+  text-align: center;
+  color: var(--c-fg-dim);
+}
+
+.code-viewer-error {
+  padding: 2rem;
+  text-align: center;
+  color: var(--c-accent);
+}
+
+.code-viewer-meta {
+  padding: 0.5rem 1rem;
+  border-top: 1px dashed var(--c-border);
+  background: var(--c-bg-alt);
+  font-size: 0.75rem;
+  color: var(--c-fg-dim);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.code-viewer-meta a {
+  color: var(--c-secondary);
+}
+
+.code-viewer-meta a:hover {
   color: var(--c-accent);
 }
 
@@ -233,5 +373,14 @@ details.project[open] summary::before {
 
   #search-results {
     margin-left: 1rem;
+  }
+
+  .code-viewer {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .code-viewer-content {
+    font-size: 0.65rem;
   }
 }
